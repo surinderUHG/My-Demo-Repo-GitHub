@@ -2,20 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.mycompany</groupId>
-	<artifactId>mavenexamples</artifactId>
+	<groupId>com.optum.cirrus.isl</groupId>
+	<artifactId>cirrus-isl</artifactId>
 	<packaging>mule</packaging>
-	<version>1.0.0-SNAPSHOT</version> 
+	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<mule.version>3.5.2</mule.version>
+		<project.version>1.0.0-SNAPSHOT</project.version>
+		<project.artifactId>mule-mmc-rest-plugin</project.artifactId>
+		<mule.version>3.5.2</mule.version> 
 		<eclipsePluginVersion>2.8</eclipsePluginVersion>
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
 		<junit.version>4.9</junit.version>
+		<muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl>
 	</properties>
 
 	<build>
@@ -33,7 +35,7 @@
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
+					<groupId>org.eclipse.m2e</groupId> 
 					<artifactId>lifecycle-mapping</artifactId>
 					<version>1.0.0</version>
 					<configuration>
@@ -72,17 +74,17 @@
 				<extensions>true</extensions>
 				<configuration>
 					<copyToAppsDirectory>true</copyToAppsDirectory>
-					<inclusions>
-			                        <inclusion>
-			                            <groupId>org.mule.transports</groupId>
-			                            <artifactId>mule-transport-amqp</artifactId>
-			                        </inclusion>
-			                    	<inclusion>
-			                            <groupId>com.mulesoft.security</groupId>
-			                            <artifactId>mule-module-security-property-placeholder</artifactId>
-			                        </inclusion>
-                    			</inclusions>
-				</configuration>
+				<inclusions>
+                        <inclusion>
+                            <groupId>org.mule.transports</groupId>
+                            <artifactId>mule-transport-amqp</artifactId>
+                        </inclusion>
+                    <inclusion>
+                            <groupId>com.mulesoft.security</groupId>
+                            <artifactId>mule-module-security-property-placeholder</artifactId>
+                        </inclusion>
+                    </inclusions>
+                </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -130,10 +132,7 @@
 						<resource>
 							<directory>src/main/app/</directory>
 						</resource>
-						<!--<resource>
-			                            <directory>src/main/api/</directory>
-			                        </resource>-->
-                    			</resources>
+					</resources>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -206,11 +205,34 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.github.nicholasastuart</groupId>
+                <artifactId>mule-mmc-rest-plugin</artifactId>
+				<version>1.2.0</version>
+                <executions>
+                	<execution>
+                		<id>mule-deploy</id>
+                		<phase>install</phase>
+                		<goals>
+                			<goal>deploy</goal>
+                		</goals>
+                		<configuration>
+                			<muleApiUrl>${muleApiUrl}</muleApiUrl>
+                			<name>${project.artifactId}</name>
+                			<username>admin</username>
+                			<password>admin</password>
+                			<appDirectory>${project.basedir}/src/main/app</appDirectory>
+                			<finalName>${project.artifactId}-${project.version}</finalName>
+                			<serverGroup>Test</serverGroup>
+                		</configuration>
+                	</execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
-	<!-- plugins for creating site reports  -->
-	<!--  <reporting>
+	<!-- plugins for creating site reports 
+	<reporting>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -282,7 +304,8 @@
 				<version>2.3.2</version>
 			</plugin>
 		</plugins>
-	</reporting>-->
+	</reporting>
+	-->
 
 	<!-- Mule Dependencies -->
 	<dependencies>
@@ -412,6 +435,7 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.cloveretl</groupId>
 			<artifactId>cloveretl-engine</artifactId>
@@ -428,7 +452,7 @@
             <artifactId>mule-module-security-property-placeholder</artifactId>
             <version>1.3.0</version>
         </dependency>
-
+        
         <dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
@@ -453,7 +477,12 @@
         	  
         	<scope>system</scope>
         	<systemPath>${project.basedir}/mapforce/274/v1.0/mapping.jar</systemPath>
-        	
+        </dependency>
+        
+        <dependency>
+		<groupId>com.github.nicholasastuart</groupId>
+		<artifactId>mule-mmc-rest-plugin</artifactId>
+		<version>1.2.0</version>
         </dependency>
         
     </dependencies>
