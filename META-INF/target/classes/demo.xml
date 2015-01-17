@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" xmlns:ajax="http://www.mulesoft.org/schema/mule/ajax"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:amqp="http://www.mulesoft.org/schema/mule/amqp" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd
+http://www.mulesoft.org/schema/mule/ajax http://www.mulesoft.org/schema/mule/ajax/current/mule-ajax.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/amqp http://www.mulesoft.org/schema/mule/amqp/current/mule-amqp.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <mulexml:jaxb-context name="JAXB_Context" packageNames="com.learning" doc:name="JAXB Context"></mulexml:jaxb-context>
+    <amqp:connector name="RabbitMQConnector" validateConnections="true" doc:name="AMQP Connector"></amqp:connector>
+    <mulexml:jaxb-xml-to-object-transformer jaxbContext-ref="JAXB_Context" name="XML_to_JAXB_Object" doc:name="XML to JAXB Object"></mulexml:jaxb-xml-to-object-transformer>
+    <amqp:endpoint queueName="queue1" name="AMQP1" responseTimeout="10000" connector-ref="RabbitMQConnector" doc:name="AMQP"></amqp:endpoint>
+    <amqp:endpoint queueName="queue2" name="AMQP2" responseTimeout="10000" connector-ref="RabbitMQConnector" doc:name="AMQP"/>
+    <flow name="demoFlow" doc:name="demoFlow"> 
+        <file:inbound-endpoint path="C:\inputlocation" responseTimeout="10000" doc:name="File"></file:inbound-endpoint>  
+        <amqp:outbound-endpoint queueName="queue1" exchangeType="direct" responseTimeout="10000" connector-ref="RabbitMQConnector" ref="AMQP1" doc:name="AMQP"></amqp:outbound-endpoint>
+        <logger level="INFO" doc:name="Logger"/>  
+    </flow>
+    <flow doc:name="MessageProcessor" name="MessageProcessor"> 
+        <amqp:inbound-endpoint connector-ref="RabbitMQConnector" doc:name="AMQP" queueName="queue1" ref="AMQP1" responseTimeout="10000"> 
+            <amqp:transaction action="ALWAYS_BEGIN"></amqp:transaction>  
+        </amqp:inbound-endpoint>
+         <logger level="INFO" doc:name="Logger"/>
+        <echo-component doc:name="Echo"/>
+        <append-string-transformer message="************************************************************" doc:name="Append String"/>  
+        <amqp:outbound-endpoint connector-ref="RabbitMQConnector" doc:name="AMQP" queueName="queue2" ref="AMQP2" responseTimeout="10000"> 
+            <amqp:transaction action="ALWAYS_JOIN"></amqp:transaction>  
+        </amqp:outbound-endpoint>
+    </flow>
+    <flow doc:name="Output" name="Output"> 
+        <amqp:inbound-endpoint connector-ref="RabbitMQConnector" doc:name="AMQP" queueName="queue2" ref="AMQP2" responseTimeout="10000"></amqp:inbound-endpoint>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <echo-component doc:name="Echo"/>  
+    </flow>
+</mule>
