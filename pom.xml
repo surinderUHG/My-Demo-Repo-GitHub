@@ -12,7 +12,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.version>1.0.0-SNAPSHOT</project.version>
 		<project.artifactId>mule-mmc-rest-plugin</project.artifactId>
-		<mule.version>3.5.2</mule.version> 
+		<mule.version>3.5.1</mule.version> 
 		<eclipsePluginVersion>2.8</eclipsePluginVersion>
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
