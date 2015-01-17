@@ -3,22 +3,19 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mycompany</groupId>
-	<artifactId>mavenexamples</artifactId>
+	<artifactId>mavenjenkinsexample</artifactId>
 	<packaging>mule</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.version>1.0.0-SNAPSHOT</project.version>
-		<project.artifactId>mule-mmc-rest-plugin</project.artifactId>
-		<mule.version>3.5.2</mule.version> 
+
+		<mule.version>3.5.2</mule.version>
 		<eclipsePluginVersion>2.8</eclipsePluginVersion>
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
 		<junit.version>4.9</junit.version>
-		<!-- <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl> -->
-		 <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl>
 	</properties>
 
 	<build>
@@ -60,31 +57,16 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-				<plugin>
-		          <groupId>org.apache.maven.plugins</groupId>
-		          <artifactId>maven-surefire-plugin</artifactId>
-		          <version>2.18.1</version>
-		        </plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.mule.tools</groupId>
 				<artifactId>maven-mule-plugin</artifactId>
-				<version>1.8</version>
+				<version>1.9</version>
 				<extensions>true</extensions>
 				<configuration>
 					<copyToAppsDirectory>true</copyToAppsDirectory>
-					<inclusions>
-			                        <inclusion>
-			                            <groupId>org.mule.transports</groupId>
-			                            <artifactId>mule-transport-amqp</artifactId>
-			                        </inclusion>
-			                    	<inclusion>
-			                            <groupId>com.mulesoft.security</groupId>
-			                            <artifactId>mule-module-security-property-placeholder</artifactId>
-			                        </inclusion>
-                    			</inclusions>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -133,10 +115,10 @@
 						<resource>
 							<directory>src/main/app/</directory>
 						</resource>
-						<!--<resource>
-			                            <directory>src/main/api/</directory>
-			                        </resource>-->
-                    			</resources>
+					<resource>
+                            <directory>src/main/api/</directory>
+                        </resource>
+                    </resources>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -209,34 +191,11 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.github.nicholasastuart</groupId>
-                <artifactId>mule-mmc-rest-plugin</artifactId>
-				<version>1.2.0</version>
-                <executions>
-                	<execution>
-                		<id>mule-deploy</id>
-                		<phase>install</phase>
-                		<goals>
-                			<goal>deploy</goal>
-                		</goals>
-                		<configuration>
-                			<muleApiUrl>${muleApiUrl}</muleApiUrl>
-                			<name>${project.artifactId}</name>
-                			<username>admin</username>
-                			<password>admin</password>
-                			<appDirectory>${project.basedir}/src/main/app</appDirectory>
-                			<finalName>${project.artifactId}-${project.version}</finalName>
-                			<serverGroup>Test</serverGroup>
-                		</configuration>
-                	</execution>
-                </executions>
-            </plugin>
 		</plugins>
 	</build>
 
-	<!-- plugins for creating site reports  -->
-	<!--  <reporting>
+	<!-- plugins for creating site reports -->
+	<reporting>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -308,7 +267,7 @@
 				<version>2.3.2</version>
 			</plugin>
 		</plugins>
-	</reporting>-->
+	</reporting>
 
 	<!-- Mule Dependencies -->
 	<dependencies>
@@ -444,50 +403,7 @@
 			<version>${mule.version}</version>
 			<scope>test</scope>
 		</dependency>
-	<dependency>
-            <groupId>org.mule.transports</groupId>
-            <artifactId>mule-transport-amqp</artifactId>
-            <version>3.4.4</version>
-        </dependency>
-    <dependency>
-            <groupId>com.mulesoft.security</groupId>
-            <artifactId>mule-module-security-property-placeholder</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-
-        <dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.9</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-asl</artifactId>
-		    <version>1.9.11</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.maven.surefire</groupId>
-		    <artifactId>surefire-junit4</artifactId>
-		    <version>2.18.1</version>
-		    <type>maven-plugin</type>
-		</dependency>
-        
-        <dependency>
-        	<groupId>com.altova.io</groupId>
-        	<artifactId>isl-mapforce-mappings</artifactId>
-        	<version>1.0.0-SNAPSHOT</version> 
-        	  
-        	<scope>system</scope>
-        	<systemPath>${project.basedir}/mapforce/274/v1.0/mapping.jar</systemPath>
-        </dependency>
-        
-        <dependency>
-			<groupId>com.github.nicholasastuart</groupId>
-			<artifactId>mule-mmc-rest-plugin</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-        
-    </dependencies>
+	</dependencies>
 
 	<repositories>
           <repository>
@@ -507,11 +423,6 @@
             <name>MuleSoft Snapshots Repository</name>
             <url>http://repository.mulesoft.org/snapshots/</url>
             <layout>default</layout>
-        </repository>
-    <repository>
-            <id>muleforge-releases</id>
-            <name>MuleForge Snapshot Repository</name>
-            <url>http://repository-master.mulesoft.org/releases/</url>
         </repository>
     </repositories>
     <pluginRepositories>
