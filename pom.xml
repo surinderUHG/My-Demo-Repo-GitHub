@@ -10,14 +10,15 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<mule.version>3.5.2</mule.version>
+		<project.version>1.0.0-SNAPSHOT</project.version>
+		<project.artifactId>mule-mmc-rest-plugin</project.artifactId>
+		<mule.version>3.5.2</mule.version> 
 		<eclipsePluginVersion>2.8</eclipsePluginVersion>
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
 		<junit.version>4.9</junit.version>
-		
-		<muleApiUrl>http://127.0.0.1:8585/mmc-3.5.2-HF1/api</muleApiUrl>
+		<!-- <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl> -->
+		 <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl>
 	</properties>
 
 	<build>
@@ -208,27 +209,28 @@
             
             
             <plugin>
-				<groupId>com.github.nicholasastuart</groupId>
-				<artifactId>mule-mmc-rest-plugin</artifactId>
+                <groupId>com.github.nicholasastuart</groupId>
+                <artifactId>mule-mmc-rest-plugin</artifactId>
 				<version>1.2.0</version>
-				<executions>
-				  <execution>
-					<id>mule-deploy</id>
-					<phase>install</phase>
-					<goals>
-					  <goal>deploy</goal>
-					</goals>
-					<configuration>
-					  <muleApiUrl>${muleApiUrl}</muleApiUrl>
-					  <name>${artifactId}</name>
-					  <username>admin</username>
-					  <password>admin</password>
-					  <version>${version}</version>
-					  <serverGroup>Development</serverGroup>
-					</configuration>
-				  </execution>
-				</executions>
-			</plugin>
+                <executions>
+                	<execution> 
+                		<id>mule-deploy</id>
+                		<phase>install</phase>
+                		<goals>
+                			<goal>deploy</goal> 
+                		</goals>
+                		<configuration>
+                			<muleApiUrl>${muleApiUrl}</muleApiUrl>
+                			<name>${project.artifactId}</name>
+                			<username>admin</username>
+                			<password>admin</password>
+                			<appDirectory>${project.basedir}/src/main/app</appDirectory>
+                			<finalName>${project.artifactId}-${project.version}</finalName>
+                			<serverGroup>Test</serverGroup>
+                		</configuration>
+                	</execution> 
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
@@ -474,19 +476,20 @@
         <dependency>
         	<groupId>com.altova.io</groupId>
         	<artifactId>isl-mapforce-mappings</artifactId>
-        	<version>1.0.0-SNAPSHOT</version>        	  
+        	<version>1.0.0-SNAPSHOT</version> 
+        	  
         	<scope>system</scope>
-        	<systemPath>${project.basedir}/mapforce/274/v1.0/mapping.jar</systemPath>       	
+        	<systemPath>${project.basedir}/mapforce/274/v1.0/mapping.jar</systemPath>
         </dependency>
         
         <dependency>
-			<groupId>com.github.nicholasastuart</groupId>
-			<artifactId>mule-mmc-rest-plugin</artifactId>
-			<version>1.2.0</version>
-		</dependency>
+		<groupId>com.github.nicholasastuart</groupId>
+		<artifactId>mule-mmc-rest-plugin</artifactId>
+		<version>1.2.0</version>
+        </dependency>
         
     </dependencies>
-  
+
 	<repositories>
           <repository>
             <id>Central</id>
