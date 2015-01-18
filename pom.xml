@@ -12,7 +12,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.version>1.0.0-SNAPSHOT</project.version>
 		<project.artifactId>mule-mmc-rest-plugin</project.artifactId>
-		<mule.version>3.5.1</mule.version> 
+		<mule.version>3.5.2</mule.version> 
 		<eclipsePluginVersion>2.8</eclipsePluginVersion>
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
@@ -20,7 +20,7 @@
 		<!-- <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl> -->
 		 <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl>
 	</properties>
-
+ 
 	<build>
 		<!-- Use a newer version of the install plugin than what your Maven uses 
 			by default. The older version failed to install the project if there was 
