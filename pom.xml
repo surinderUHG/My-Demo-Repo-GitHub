@@ -23,7 +23,7 @@
 	 <scm>
 		<url>https://github.com/surinderUHG/My-Demo-Repo-GitHub</url>
 		<connection>scm:git:git://github.com/surinderUHG/My-Demo-Repo-GitHub.git</connection>
-		<developerConnection>scm:git:git@github.com/surinderUHG/My-Demo-Repo-GitHub.git</developerConnection> 
+		<developerConnection>scm:git:git@github.com/surinderUHG/My-Demo-Repo-GitHub/MavenJenkins.git</developerConnection> 
 	</scm>
 	<build> 
 		<!-- Use a newer version of the install plugin than what your Maven uses 
