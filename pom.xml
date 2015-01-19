@@ -23,9 +23,10 @@
 	 <scm>
 		<url>https://github.com/surinderUHG/My-Demo-Repo-GitHub</url>
 		<connection>scm:git:git://github.com/surinderUHG/My-Demo-Repo-GitHub.git</connection>
-		<developerConnection>scm:git:git@github.com/surinderUHG/My-Demo-Repo-GitHub/MavenJenkins.git</developerConnection> 
+		<tag>MavenJenkins</tag> 
+		<developerConnection>scm:git:git@github.com/surinderUHG/My-Demo-Repo-GitHub.git</developerConnection>
 	</scm>
-	<build> 
+	<build>
 		<!-- Use a newer version of the install plugin than what your Maven uses 
 			by default. The older version failed to install the project if there was 
 			no target/classes folder. Since we use mule packaging on the project we actually 
@@ -235,7 +236,7 @@
                 	</execution> 
                 </executions>
             </plugin>
-			<plugin>
+			 <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
 				<version>1.3</version>
