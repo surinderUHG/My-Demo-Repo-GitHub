@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mycompany</groupId>
-	<artifactId>mavenJenkinsExample</artifactId>
+	<artifactId>mavenjenkinsexample</artifactId>
 	<packaging>mule</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
@@ -230,7 +230,7 @@
                 			<username>admin</username>
                 			<password>admin</password>
                 			<appDirectory>${project.basedir}/src/main/app</appDirectory>
-                			<finalName>$\{project.artifactId}-$\{project.version}-r$\{buildNumber}</finalName>
+                			<finalName>${project.artifactId}-${project.version}</finalName>
                 			<serverGroup>Test</serverGroup>
                 		</configuration>
                 	</execution> 
@@ -536,7 +536,7 @@
             <name>MuleForge Snapshot Repository</name>
             <url>http://repository-master.mulesoft.org/releases/</url>
         </repository>
-    </repositories>
+    </repositories> 
     <pluginRepositories>
         <pluginRepository>
             <id>mulesoft-release</id>
