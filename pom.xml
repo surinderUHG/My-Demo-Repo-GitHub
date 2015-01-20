@@ -20,12 +20,12 @@
 		<!-- <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl> -->
 		 <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl>
 	</properties>
-	 <scm>
+	<scm>
 		<url>https://github.com/surinderUHG/My-Demo-Repo-GitHub</url>
 		<connection>scm:git:git://github.com/surinderUHG/My-Demo-Repo-GitHub.git</connection>
 		<tag>MavenJenkins</tag> 
 		<developerConnection>scm:git:git@github.com/surinderUHG/My-Demo-Repo-GitHub.git</developerConnection>
-	</scm>
+	</scm> 
 	<build>
 		<!-- Use a newer version of the install plugin than what your Maven uses 
 			by default. The older version failed to install the project if there was 
@@ -236,32 +236,23 @@
                 	</execution> 
                 </executions>
             </plugin>
-			 <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.3</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<doCheck>true</doCheck>
-					<doUpdate>true</doUpdate>
-					<!-- To Place in manifest of your War. 
-					<archive>
-			            <manifest>
-			              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-			            </manifest>
-			            <manifestEntries>
-			              <Implementation-Build>$\{buildNumber}</Implementation-Build>
-			            </manifestEntries>
-			          </archive> -->
-				</configuration>
-			</plugin>
+		      <plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>buildnumber-maven-plugin</artifactId>
+		        <version>1.3</version>
+		        <executions>
+		          <execution>
+		            <phase>validate</phase>
+		            <goals>
+		              <goal>create</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		        <configuration>
+		          <doCheck>true</doCheck>
+		          <doUpdate>true</doUpdate>
+		        </configuration>
+		      </plugin> 
 		</plugins>
 	</build>
 
