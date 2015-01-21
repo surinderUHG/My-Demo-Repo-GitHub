@@ -21,10 +21,10 @@
 		 <muleApiUrl>http://localhost:8585/mmc-3.5.2-HF1/api</muleApiUrl>
 	</properties>
 	 <scm>
-		<url>https://surinderUHG:NoProblem@github.com/surinderUHG/My-Demo-Repo-GitHub.git</url>
-		<connection>scm:git:git@surinderUHG:NoProblem@github.com/surinderUHG/My-Demo-Repo-GitHub.git</connection>
-		<tag>--MavenJenkins</tag>
-		<developerConnection>scm:git:git:surinderUHG:NoProblem@github.com/surinderUHG/My-Demo-Repo-GitHub.git</developerConnection>
+		<url>https://github.com/surinderUHG/My-Demo-Repo-GitHub.git</url>
+		<connection>scm:git:git@github.com/surinderUHG/My-Demo-Repo-GitHub.git</connection>
+		<tag>MavenJenkins</tag>
+		<developerConnection>scm:git:git@github.com/surinderUHG/My-Demo-Repo-GitHub.git</developerConnection>
 	</scm>  
 	<build> 
 		<!-- Use a newer version of the install plugin than what your Maven uses 
@@ -230,7 +230,7 @@
                 			<username>admin</username>
                 			<password>admin</password>
                 			<appDirectory>${project.basedir}/src/main/app</appDirectory>
-                			<finalName>${SCMBranch}-${project.artifactId}-${project.version}-${buildNumber}</finalName>
+                			<finalName>${project.artifactId}-${project.version}</finalName>
                 			<serverGroup>Test</serverGroup>
                 		</configuration>
                 	</execution> 
@@ -239,7 +239,7 @@
 		      <plugin>
 		        <groupId>org.codehaus.mojo</groupId>
 		        <artifactId>buildnumber-maven-plugin</artifactId>
-		        <version>1.3</version>
+		        <version>1.2</version>
 		        <executions>
 		          <execution>
 		            <phase>validate</phase> 
@@ -251,7 +251,7 @@
 		        <configuration>
 		          <!-- <doCheck>true</doCheck>
 		          <doUpdate>true</doUpdate> --> 
-		          <doCheck>false</doCheck>
+		          <doCheck>true</doCheck>
 		          <doUpdate>true</doUpdate>
 		        </configuration>
 		      </plugin> 
